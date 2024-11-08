@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Pagos en Cuotas</title>
+    <style>
+        /* Los estilos se mantienen igual */
+        body { 
+            font-family: Arial, sans-serif; 
+            line-height: 1.6; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        .error {
+            color: red;
+            margin: 10px 0;
+            padding: 5px;
+        }
+        .success {
+            color: green;
+            margin: 10px 0;
+            padding: 5px;
+        }
+        #resultadoSimulacion {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #datosUsuario {
+            margin: 20px 0;
+            font-size: 1.2em;
+            color: #007bff;
+        }
+        #btnCerrarSesion {
+            background-color: #dc3545;
+        }
+        #btnCerrarSesion:hover {
+            background-color: #c82333;
+        }
+        .aviso-nueva-simulacion {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        .aviso-nueva-simulacion p {
+            margin: 0;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simulador de Pagos en Cuotas</h1>
+        
+        <!-- Formulario de Registro -->
+        <div id="registroForm">
+            <h2>Registro de Usuario</h2>
+            <div class="form-group">
+                <label for="regNombre">Nombre:</label>
+                <input type="text" id="regNombre" required placeholder="Ingrese su nombre">
+                
+                <label for="regUsuario">Usuario:</label>
+                <input type="text" id="regUsuario" required placeholder="Ingrese su nombre de usuario">
+                
+                <label for="regPassword">Contraseña:</label>
+                <input type="password" id="regPassword" required placeholder="Ingrese su contraseña">
+                
+                <div id="mensajeRegistro" class="error"></div>
+                <button id="btnRegistrar">Registrar</button>
+            </div>
+        </div>
+
+        <!-- Formulario de Login -->
+        <div id="loginForm">
+            <h2>Iniciar Sesión</h2>
+            <div class="form-group">
+                <label for="loginUsuario">Usuario:</label>
+                <input type="text" id="loginUsuario" required placeholder="Ingrese su usuario">
+                
+                <label for="loginPassword">Contraseña:</label>
+                <input type="password" id="loginPassword" required placeholder="Ingrese su contraseña">
+                
+                <div id="mensajeLogin" class="error"></div>
+                <button id="btnLogin">Iniciar Sesión</button>
+            </div>
+        </div>
+
+        <!-- Simulador -->
+        <div id="simuladorContainer" class="hidden">
+            <h2>Simulador de Préstamo</h2>
+            <div id="datosUsuario"></div>
+            
+            <div class="form-group">
+                <label for="monto">Monto total (USD):</label>
+                <input type="number" id="monto" min="0" required placeholder="Ingrese el monto en USD">
+                
+                <label for="cuotas">Número de cuotas:</label>
+                <input type="number" id="cuotas" min="1" required placeholder="Ingrese el número de cuotas">
+                
+                <label for="interes">Tasa de interés anual (%):</label>
+                <input type="number" id="interes" min="0" step="0.01" required placeholder="Ingrese la tasa de interés">
+                
+                <div id="mensajeSimulacion" class="error"></div>
+                <button id="btnSimular">Calcular</button>
+                <button id="btnCerrarSesion">Cerrar Sesión</button>
+            </div>
+
+            <div id="resultadoSimulacion" class="hidden"></div>
+            
+            <div id="historialContainer" class="hidden">
+                <h3>Historial de Simulaciones</h3>
+                <table id="historialTable">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Monto (USD)</th>
+                            <th>Cuotas</th>
+                            <th>Interés</th>
+                            <th>Cuota Mensual</th>
+                            <th>Total a Pagar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
